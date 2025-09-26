@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip Calculator Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #E6F3FF;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-image {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-link {
+            display: inline-block;
+            background: #4682B4;
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .card-link:hover {
+            background: #5a8bc4;
+            transform: translateY(-2px);
+        }
+
+        .error {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            background: #ffe6e6;
+            color: #d63031;
+            font-size: 1rem;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .card-content {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="grid" id="cards-grid">
+            <div class="card" data-index="0">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758819811.png" alt="Card 1 - Result: $1290.33" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $1290.33</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=bf2c47da-cb27-489b-b2a1-9127266e298a" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="1">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758819867.png" alt="Card 2 - Result: $1290.33" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $1290.33</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=39ad0b8f-b363-4e80-ad9f-ddcd485e8e94" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="2">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758822351.png" alt="Card 3 - Result: $772.53" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $772.53</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=daf9afa8-3385-4579-b5ba-1610530bc1de" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="3">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758822439.png" alt="Card 4 - Result: $1031.43" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $1031.43</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=265db61b-0af2-49e1-81c3-cf891ab660a6" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="4">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758822530.png" alt="Card 5 - Result: $643.08" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $643.08</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=ece87b2e-af19-4739-8a49-db3b608ef238" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="5">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758822619.png" alt="Card 6 - Result: $804.89" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $804.89</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=f8cc94e8-228f-4f58-a071-f28b8e82afcb" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="6">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758822703.png" alt="Card 7 - Result: $578.36" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $578.36</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=fd8151cc-b78b-4be6-9f22-3b97cec9752e" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="7">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758822789.png" alt="Card 8 - Result: $190.01" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $190.01</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=879e0432-6eae-4c05-9f32-2455e703ea34" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="8">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758822877.png" alt="Card 9 - Result: $28.2" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $28.2</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=641dbea9-edf0-4618-a631-44ac040afd27" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="9">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758822964.png" alt="Card 10 - Result: $109.1" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $109.1</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=5a3e1fc6-10de-476e-b717-045dc51c4bf3" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="10">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758823065.png" alt="Card 11 - Result: $67.03" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $67.03</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=2d96d5a7-e7ca-48df-b8d5-fd23a5641b23" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="11">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758823149.png" alt="Card 12 - Result: $173.83" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $173.83</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=2cf9bc0f-fc39-45d1-b449-725f98abe9e2" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="12">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758823233.png" alt="Card 13 - Result: $157.65" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $157.65</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=af27eb23-4332-46d4-95f4-2ef671c37e6b" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="13">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758823317.png" alt="Card 14 - Result: $335.64" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $335.64</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=b5ef8de0-97e9-43b6-b108-f0ea04fe4679" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="14">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758823407.png" alt="Card 15 - Result: $37.9" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $37.9</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=584346f3-f13d-4610-93d6-ded88af385eb" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="15">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758823495.png" alt="Card 16 - Result: $67.03" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $67.03</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=945ad23a-f367-4ed6-a11c-25f95e5670fb" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="16">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758823581.png" alt="Card 17 - Result: $24.96" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $24.96</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=216b0178-6bc4-4b3f-bb32-beaa4ceb5371" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="17">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758823664.png" alt="Card 18 - Result: $92.92" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $92.92</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=6bcb708c-c2e3-4559-a534-949c06d752c3" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="18">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758823747.png" alt="Card 19 - Result: $190.01" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $190.01</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=ebb1c4da-a812-4b78-b218-8b3182256f96" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="19">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758823832.png" alt="Card 20 - Result: $238.55" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $238.55</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=31447192-168f-4d4b-8cf1-261c4c3e9e65" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="20">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758823918.png" alt="Card 21 - Result: $274.15" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $274.15</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=9ac32526-984e-4eb4-ba64-74ecfc18cc02" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="21">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758824004.png" alt="Card 22 - Result: $351.82" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $351.82</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=2cf86d39-cc35-40b8-a673-9d4c65642fdc" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="22">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758824088.png" alt="Card 23 - Result: $578.36" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $578.36</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=39fdc522-2534-4e8d-9c9e-a3ce7b3d8faa" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="23">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758824174.png" alt="Card 24 - Result: $772.53" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $772.53</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=da8126b6-f60a-48d5-a296-8cb28c4a05fc" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="24">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758824260.png" alt="Card 25 - Result: $578.36" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $578.36</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=37e41bf3-8abf-413c-9851-2b4d2112932f" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="25">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758824346.png" alt="Card 26 - Result: $578.36" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $578.36</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=17668059-0f1e-431f-b1e2-eb7f4d525feb" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="26">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758824431.png" alt="Card 27 - Result: $18.49" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $18.49</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=01cc644d-b187-4a2f-9c63-5957422dd91e" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="27">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758824519.png" alt="Card 28 - Result: $47.61" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $47.61</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=0dad93e0-6b07-4b2e-b47b-da42bc5b966a" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="28">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758824604.png" alt="Card 29 - Result: $151.17" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $151.17</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=84e0c59c-cc6c-4bfa-b380-37c51be29fa3" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="29">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758824688.png" alt="Card 30 - Result: $151.17" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $151.17</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=c6943e4a-d477-4072-8117-3e9b125135b5" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="30">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758824775.png" alt="Card 31 - Result: $448.91" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $448.91</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=fde78bf2-f5db-4d94-b0a8-a8a9db9fe130" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="31">
+                <div class="card-image-container">
+                    <img src="listing_images\front_1758824860.png" alt="Card 32 - Result: $1937.58" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $1937.58</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=a4a0b382-8b2f-4a64-8d68-05aa67207a5b" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="32">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$3200" alt="Card 33 - Result: $2067.03" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $2067.03</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=2a7b0181-25d8-482a-bd6b-c3350928616d" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="33">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$3600" alt="Card 34 - Result: $2325.93" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $2325.93</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=a8adb7de-de4b-40c2-a7c7-190c8b72f6fe" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="34">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$3500" alt="Card 35 - Result: $2261.21" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $2261.21</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=71e79b25-ed45-4624-85b4-1ac3a28353ad" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="35">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$3500" alt="Card 36 - Result: $2261.21" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $2261.21</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=2126e56d-29f6-4311-a6fd-436ea95866ea" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="36">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$2000" alt="Card 37 - Result: $1290.33" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $1290.33</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=0d17534c-58a9-4e13-a20f-bf97098362f9" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="37">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$1300" alt="Card 38 - Result: $837.26" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $837.26</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=e776c9b0-5b67-41d6-b442-1fa4d5fe7f2d" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="38">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$2000" alt="Card 39 - Result: $1290.33" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $1290.33</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=2eb8a42e-7cf4-4bb7-85b7-d47ddd6cb264" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="39">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$1800" alt="Card 40 - Result: $1160.88" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $1160.88</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=b69b4aff-349a-4722-9c56-49b5cff085b4" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="40">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$1800" alt="Card 41 - Result: $1160.88" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $1160.88</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=096fa48d-3888-4dce-9ae3-2ecfffce7047" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="41">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$1600" alt="Card 42 - Result: $1031.43" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $1031.43</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=81d45d63-49d1-41ad-a1c1-a4e923398e0a" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="42">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$1500" alt="Card 43 - Result: $966.71" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $966.71</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=7a45c1ff-4ff2-494d-a9b3-80cfc292325a" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="43">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$1250" alt="Card 44 - Result: $804.89" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $804.89</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=c411954e-059f-41d6-9e62-2f11d85e5d37" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="44">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$950" alt="Card 45 - Result: $610.72" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $610.72</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=1e691500-f862-435a-aa6d-3e3f2d988507" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="45">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$600" alt="Card 46 - Result: $384.18" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $384.18</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=16925a3a-c2c9-4e29-8b2a-11f80aab96c4" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="46">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$730" alt="Card 47 - Result: $468.33" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $468.33</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=5b35607f-af75-42ba-a592-eb476ca4942c" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="47">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$720" alt="Card 48 - Result: $461.85" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $461.85</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=bb090a89-940e-4885-a8cf-ef7883a0e956" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="48">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$720" alt="Card 49 - Result: $461.85" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $461.85</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=59ccdb57-802a-44c9-bab9-8f0ae70d9019" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="49">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$650" alt="Card 50 - Result: $416.55" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $416.55</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=d7101322-9a05-4d85-88e3-567ec68e8c59" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="50">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$600" alt="Card 51 - Result: $384.18" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $384.18</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=565981cf-fe6a-40c1-bc58-069e06339fe4" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="51">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$650" alt="Card 52 - Result: $416.55" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $416.55</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=5a85c975-0eeb-47ce-ae44-20d2a4f68cf6" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="52">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$300" alt="Card 53 - Result: $190.01" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $190.01</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=0821f183-a3cd-4562-954e-71714dcd6875" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="53">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$150" alt="Card 54 - Result: $92.92" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $92.92</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=266160b7-36e4-4ae5-a375-4c7acc097896" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="54">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$85" alt="Card 55 - Result: $50.85" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $50.85</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=e31bb4e5-4536-4ca4-a658-0df494cc50a5" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="55">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$110" alt="Card 56 - Result: $67.03" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $67.03</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=939ddfc0-229b-438c-9718-6de70dad99f1" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="56">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$65" alt="Card 57 - Result: $37.9" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $37.9</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=b20adb20-9c41-4e72-860a-c3a6965361fe" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="57">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$65" alt="Card 58 - Result: $37.9" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $37.9</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=f6a563a7-fe70-42d3-a942-a46f47f75dae" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="58">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$65" alt="Card 59 - Result: $37.9" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $37.9</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=3b2730f4-3d7b-494f-a229-b6e927ebbeef" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="59">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$65" alt="Card 60 - Result: $37.9" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $37.9</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=2175d8b2-7986-4054-ba2d-d61e129e9559" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="60">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$65" alt="Card 61 - Result: $37.9" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $37.9</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=0cdfa4ff-7aea-4880-85ff-6576575314ea" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="61">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$65" alt="Card 62 - Result: $37.9" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $37.9</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=ab4d59cc-65b8-49d1-b243-7704069f5942" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="62">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$55" alt="Card 63 - Result: $31.43" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $31.43</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=5d8cced4-fa58-46e5-b992-0325efb9b402" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="63">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$50" alt="Card 64 - Result: $28.2" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $28.2</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=4cebeca5-31a0-4177-9178-d7db5a851f60" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+            <div class="card" data-index="64">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/300x400/4682B4/ffffff?text=$40" alt="Card 65 - Result: $21.72" class="card-image" 
+                         onerror="this.parentElement.innerHTML='<div class=\'error\'>Failed to load image</div>'">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Result: $21.72</h3>
+                    <a href="https://app.alt.xyz/liquid-auctions/select-listing?ids=653c1110-61bd-426d-b9ae-55a569865e69" target="_blank" class="card-link">View Card</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scrolling behavior
+        document.addEventListener('scroll', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    card.style.opacity = '1';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
